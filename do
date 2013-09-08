@@ -6,9 +6,8 @@
 
 version=`cat version`
 project=nacl
-shorthostname=`hostname | sed 's/\..*//' | tr -cd '[a-z][A-Z][0-9]'`
 
-top="`pwd`/build/$shorthostname"
+top="`pwd`/build"
 bin="$top/bin"
 lib="$top/lib"
 include="$top/include"
@@ -263,7 +262,7 @@ do
 		) \
 		| while read err
 		do
-		  echo "$version $shorthostname $abi $startdate $o $p fromcompiler $implementationdir $compilerword $f $err" >&5
+		  echo "$version $abi $startdate $o $p fromcompiler $implementationdir $compilerword $f $err" >&5
 		done
 	      fi
 	    done
@@ -279,7 +278,7 @@ do
 	    cat ../errors \
 	    | while read err
 	    do
-	      echo "$version $shorthostname $abi $startdate $o $p fromcompiler $implementationdir $compilerword try.c $err" >&5
+	      echo "$version $abi $startdate $o $p fromcompiler $implementationdir $compilerword try.c $err" >&5
 	    done
 	    [ "$ok" = 1 ] || continue
 
@@ -291,11 +290,11 @@ do
 	      cyclespersecond=`awk '{print $4}' < ../outputs`
 	      impl=`awk '{print $5}' < ../outputs`
 	    else
-	      echo "$version $shorthostname $abi $startdate $o $p tryfails $implementationdir $compilerword error $?" >&5
+	      echo "$version $abi $startdate $o $p tryfails $implementationdir $compilerword error $?" >&5
 	      cat ../outputs ../errors \
 	      | while read err
 	      do
-	        echo "$version $shorthostname $abi $startdate $o $p tryfails $implementationdir $compilerword $err" >&5
+	        echo "$version $abi $startdate $o $p tryfails $implementationdir $compilerword $err" >&5
 	      done
 	      continue
 	    fi
@@ -303,7 +302,7 @@ do
 	    checksumok=fails
 	    [ "x$expectedchecksum" = "x$checksum" ] && checksumok=ok
 	    [ "x$expectedchecksum" = "x" ] && checksumok=unknown
-	    echo "$version $shorthostname $abi $startdate $o $p try $checksum $checksumok $cycles $checksumcycles $cyclespersecond $impl $compilerword" >&5
+	    echo "$version $abi $startdate $o $p try $checksum $checksumok $cycles $checksumcycles $cyclespersecond $impl $compilerword" >&5
 	    [ "$checksumok" = fails ] && continue
 
 	    [ -s ../bestmedian ] && [ `cat ../bestmedian` -le $cycles ] && continue
@@ -317,7 +316,7 @@ do
 	    cat ../errors \
 	    | while read err
 	    do
-	      echo "$version $shorthostname $abi $startdate $o $p fromcompiler $implementationdir $compilerword measure.c $err" >&5
+	      echo "$version $abi $startdate $o $p fromcompiler $implementationdir $compilerword measure.c $err" >&5
 	    done
 	    [ "$ok" = 1 ] || continue
 
@@ -350,7 +349,7 @@ do
       "$work/best/measure" \
       | while read measurement
       do
-	echo "$version $shorthostname $abi $startdate $o $p $measurement" >&5
+	echo "$version $abi $startdate $o $p $measurement" >&5
       done
 
       [ -f "$o/$p/used" ] \
