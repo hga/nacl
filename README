@@ -1,8 +1,30 @@
-A mirror of Daniel Bernstein (djb) and Tanja Lange's "NaCl: Networking and Cryptography library",
-tagged for each release.  The main distribution is bereft of public repository or even a changelog;
-this is kept for version sanity.
+A version of Daniel Bernstein (djb) and Tanja Lange (hyperelliptic)'s
+"NaCl: Networking and Cryptography library", with minimal changes to
+compile as a shared library.
 
-  main site: http://nacl.cr.yp.to/
+To build, run:
 
-Release: 20090405
-Release: 20110221
+  make && make install PREFIX=/foo
+
+That will install headers into $PREFIX/include/nacl/ and libnacl into
+$PREFIX/lib.  See the Makefile for how to override these locations.
+$PREFIX defaults to /usr/local.
+
+The main NaCL site is:
+
+  http://nacl.cr.yp.to/
+
+I have verified that the release-20110221 tag corresponds to the
+20110221 release tarball from
+http://hyperelliptic.org/nacl/nacl-20110221.tar.bz2, though you are
+encouraged to do your own verification.
+
+Unlike libsodium, which aims to be a much more conventionally packaged
+version of NaCl, the few patches I have added are meant to be minimal
+and easily verified.
+
+I mostly followed the procedure on http://wiki.ucis.nl/NaCl/Shared,
+though I did not change the crypto_box interface as they did.
+
+
+-- Andy Wingo, 9 September 2013
