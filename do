@@ -37,7 +37,7 @@ mkdir -p "$bin"
 mkdir -p "$lib"
 mkdir -p "$include"
 
-exec >"$top/log"
+exec | tee >"$top/log"
 exec 2>&1
 exec 5>"$top/data"
 exec </dev/null
